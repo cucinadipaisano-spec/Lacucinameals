@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>La Cucina Box — Coming Soon</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet" />
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --white:       #FFFEF9;
+    --off-white:   #F7F5EE;
+    --green-deep:  #1B3A2D;
+    --green-mid:   #2D5C45;
+    --green-light: #4A7C5F;
+    --green-pale:  #EAF2EC;
+    --red-rich:    #B83232;
+    --red-warm:    #CC4040;
+    --red-pale:    #FAECEC;
+    --gold:        #C9A050;
+    --gold-light:  #E8D5A0;
+    --ink:         #1A1A1A;
+    --muted:       rgba(26,26,26,0.5);
+    --border-g:    rgba(27,58,45,0.15);
+    --font-display: 'Cormorant Garamond', Georgia, serif;
+    --font-body:    'Jost', sans-serif;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--white);
+    color: var(--ink);
+    font-family: var(--font-body);
+    font-weight: 300;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  .tricolore-bar { display: flex; height: 5px; width: 100%; }
+  .tricolore-bar span { flex: 1; }
+  .tricolore-bar span:nth-child(1) { background: var(--green-deep); }
+  .tricolore-bar span:nth-child(2) { background: var(--white); border-top: 0.5px solid var(--border-g); }
+  .tricolore-bar span:nth-child(3) { background: var(--red-rich); }
+
+  header {
+    padding: 1.75rem 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 0.5px solid var(--border-g);
+    background: var(--white);
+  }
+
+  .logo { display: flex; flex-direction: column; line-height: 1; }
+  .logo-top { display: flex; align-items: baseline; gap: 0.4rem; }
+  .logo-la {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-weight: 300;
+    font-size: 1.1rem;
+    color: var(--red-rich);
+    letter-spacing: 0.04em;
+  }
+  .logo-cucina {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 1.75rem;
+    letter-spacing: 0.05em;
+    color: var(--green-deep);
+    text-transform: uppercase;
+  }
+  .logo-box-word {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 1.75rem;
+    letter-spacing: 0.05em;
+    color: var(--red-rich);
+    text-transform: uppercase;
+  }
+  .logo-sub {
+    font-size: 0.6rem;
+    font-weight: 500;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--green-light);
+    margin-top: 4px;
+  }
+  .header-pill {
+    font-size: 0.65rem;
+    font-weight: 500;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--white);
+    background: var(--green-deep);
+    padding: 0.45rem 1.1rem;
+    border-radius: 2px;
+  }
+
+  .hero {
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    min-height: calc(100vh - 150px);
+  }
+
+  .hero-left {
+    padding: 5rem 4rem 5rem 3rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border-right: 0.5px solid var(--border-g);
+    position: relative;
+  }
+  .hero-left::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 3rem; bottom: 3rem;
+    width: 3px;
+    background: linear-gradient(to bottom, var(--green-deep), var(--green-light), transparent);
+    border-radius: 2px;
+  }
+
+  .eyebrow {
+    font-size: 0.68rem;
+    font-weight: 500;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--red-rich);
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+  .eyebrow::before {
+    content: '';
+    width: 2rem; height: 1.5px;
+    background: var(--red-rich);
+    display: block; flex-shrink: 0;
+  }
+
+  h1 {
+    font-family: var(--font-display);
+    font-weight: 300;
+    font-size: clamp(2.8rem, 4.5vw, 4.2rem);
+    line-height: 1.1;
+    color: var(--green-deep);
+    margin-bottom: 0.5rem;
+  }
+  h1 em { font-style: italic; color: var(--red-rich); font-weight: 400; }
+
+  .hero-sub {
+    font-size: 0.95rem;
+    font-weight: 300;
+    line-height: 1.85;
+    color: var(--muted);
+    max-width: 40ch;
+    margin: 1.5rem 0 2rem;
+  }
+
+  .from-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    background: var(--green-pale);
+    border: 0.5px solid var(--border-g);
+    border-radius: 2px;
+    padding: 0.5rem 1rem;
+    margin-bottom: 2.5rem;
+    font-size: 0.72rem;
+    font-weight: 400;
+    letter-spacing: 0.06em;
+    color: var(--green-mid);
+    width: fit-content;
+  }
+  .from-badge strong { font-weight: 600; color: var(--green-deep); }
+  .from-badge::before {
+    content: '';
+    display: block;
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--green-mid);
+    flex-shrink: 0;
+  }
+
+  .form-label {
+    font-size: 0.68rem;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--green-deep);
+    margin-bottom: 0.6rem;
+    display: block;
+  }
+  .form-row {
+    display: flex;
+    max-width: 440px;
+    border: 1.5px solid var(--green-deep);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+  .form-row input[type="email"] {
+    flex: 1;
+    border: none;
+    background: transparent;
+    padding: 0.85rem 1rem;
+    font-family: var(--font-body);
+    font-size: 0.85rem;
+    font-weight: 300;
+    color: var(--ink);
+    outline: none;
+  }
+  .form-row input::placeholder { color: rgba(26,26,26,0.3); }
+  .form-row button {
+    background: var(--green-deep);
+    color: var(--white);
+    border: none;
+    padding: 0.85rem 1.4rem;
+    font-family: var(--font-body);
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background 0.2s;
+    white-space: nowrap;
+  }
+  .form-row button:hover { background: var(--red-rich); }
+  .form-note { margin-top: 0.65rem; font-size: 0.7rem; color: var(--muted); }
+  .success-msg {
+    display: none;
+    margin-top: 0.85rem;
+    font-size: 0.8rem;
+    color: var(--green-mid);
+    font-weight: 500;
+  }
+
+  .hero-right {
+    background: var(--green-deep);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 3rem;
+    position: relative;
+    overflow: hidden;
+    min-height: 500px;
+  }
+  .hero-right::before {
+    content: '';
+    position: absolute; inset: 0;
+    background-image:
+      repeating-linear-gradient(0deg, rgba(255,255,255,0.025) 0px, rgba(255,255,255,0.025) 1px, transparent 1px, transparent 40px),
+      repeating-linear-gradient(90deg, rgba(255,255,255,0.025) 0px, rgba(255,255,255,0.025) 1px, transparent 1px, transparent 40px);
+  }
+  .hero-right::after {
+    content: '';
+    position: absolute;
+    top: 0; right: 0;
+    width: 130px; height: 130px;
+    background: var(--red-rich);
+    clip-path: polygon(100% 0, 0 0, 100% 100%);
+    opacity: 0.65;
+  }
+  .hero-right-content { position: relative; z-index: 1; }
+
+  .right-tag {
+    display: inline-block;
+    font-size: 0.62rem;
+    font-weight: 500;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--gold);
+    border: 0.5px solid rgba(201,160,80,0.35);
+    padding: 0.4rem 0.85rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .hero-right h2 {
+    font-family: var(--font-display);
+    font-weight: 300;
+    font-size: 2rem;
+    color: var(--off-white);
+    line-height: 1.3;
+    margin-bottom: 1.75rem;
+  }
+  .hero-right h2 em { font-style: italic; color: var(--gold-light); }
+
+  .feature-list { list-style: none; display: flex; flex-direction: column; gap: 0.8rem; }
+  .feature-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.85rem;
+    font-size: 0.83rem;
+    font-weight: 300;
+    color: rgba(255,254,249,0.7);
+    line-height: 1.55;
+  }
+  .feature-list li::before {
+    content: '';
+    display: block;
+    width: 14px; height: 1.5px;
+    background: var(--red-warm);
+    margin-top: 0.6em;
+    flex-shrink: 0;
+  }
+
+  .strip { display: grid; grid-template-columns: 1fr 1fr 1fr; height: 6px; }
+  .strip-g { background: var(--green-deep); }
+  .strip-w { background: var(--off-white); border-top: 0.5px solid var(--border-g); border-bottom: 0.5px solid var(--border-g); }
+  .strip-r { background: var(--red-rich); }
+
+  .marquee-wrap {
+    background: var(--off-white);
+    border-top: 0.5px solid var(--border-g);
+    border-bottom: 0.5px solid var(--border-g);
+    padding: 0.9rem 0;
+    overflow: hidden;
+  }
+  .marquee-track {
+    display: flex;
+    gap: 3rem;
+    animation: marquee 24s linear infinite;
+    width: max-content;
+  }
+  .marquee-item {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: 1rem;
+    color: var(--green-mid);
+    white-space: nowrap;
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+  }
+  .marquee-item::after { content: '✦'; font-style: normal; font-size: 0.5rem; color: var(--red-rich); }
+
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-50%); }
+  }
+
+  .how { padding: 5rem 3rem; }
+
+  .section-eyebrow {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 3rem;
+  }
+  .section-eyebrow span {
+    font-size: 0.68rem;
+    font-weight: 500;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--green-deep);
+    white-space: nowrap;
+  }
+  .section-eyebrow::before,
+  .section-eyebrow::after { content: ''; flex: 1; height: 0.5px; background: var(--border-g); }
+  .section-eyebrow::before { max-width: 2rem; }
+
+  .steps { display: grid; grid-template-columns: repeat(3, 1fr); }
+
+  .step {
+    padding: 2rem 2.5rem 2rem 0;
+    border-right: 0.5px solid var(--border-g);
+    position: relative;
+  }
+  .step:last-child { border-right: none; padding-left: 2.5rem; padding-right: 0; }
+  .step:nth-child(2) { padding-left: 2.5rem; }
+
+  .step::before {
+    content: ''; position: absolute;
+    top: 0; left: 0; right: 2.5rem; height: 2px;
+  }
+  .step:nth-child(1)::before { background: var(--green-deep); right: 2.5rem; }
+  .step:nth-child(2)::before { background: var(--red-rich); left: 2.5rem; right: 2.5rem; }
+  .step:nth-child(3)::before { background: var(--gold); left: 2.5rem; right: 0; }
+
+  .step-num {
+    font-family: var(--font-display);
+    font-size: 3.5rem;
+    font-weight: 300;
+    line-height: 1;
+    margin-bottom: 1rem;
+    margin-top: 1.25rem;
+  }
+  .step:nth-child(1) .step-num { color: rgba(27,58,45,0.15); }
+  .step:nth-child(2) .step-num { color: rgba(184,50,50,0.15); }
+  .step:nth-child(3) .step-num { color: rgba(201,160,80,0.25); }
+
+  .step h3 {
+    font-family: var(--font-display);
+    font-size: 1.45rem;
+    font-weight: 600;
+    color: var(--green-deep);
+    margin-bottom: 0.6rem;
+  }
+  .step p { font-size: 0.84rem; font-weight: 300; line-height: 1.8; color: var(--muted); }
+
+  footer {
+    background: var(--green-deep);
+    padding: 2rem 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+  .footer-logo {
+    font-family: var(--font-display);
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: var(--white);
+    letter-spacing: 0.06em;
+  }
+  .footer-logo em { color: var(--red-warm); font-style: italic; font-weight: 300; }
+  .footer-tagline {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: 0.85rem;
+    color: rgba(255,254,249,0.4);
+    margin-top: 0.25rem;
+  }
+  .footer-right {
+    font-size: 0.72rem;
+    color: rgba(255,254,249,0.45);
+    font-weight: 300;
+    line-height: 1.75;
+    text-align: right;
+  }
+  .footer-right a { color: var(--gold-light); text-decoration: none; }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .a  { animation: fadeUp 0.65s ease both; }
+  .d1 { animation-delay: 0.08s; }
+  .d2 { animation-delay: 0.2s; }
+  .d3 { animation-delay: 0.34s; }
+  .d4 { animation-delay: 0.48s; }
+  .d5 { animation-delay: 0.64s; }
+
+  @media (max-width: 768px) {
+    header { padding: 1.25rem 1.5rem; }
+    .logo-cucina, .logo-box-word { font-size: 1.4rem; }
+    .hero { grid-template-columns: 1fr; }
+    .hero-left { padding: 3rem 1.5rem 3rem 2rem; border-right: none; border-bottom: 0.5px solid var(--border-g); }
+    .hero-right { min-height: 360px; padding: 2rem 1.5rem; }
+    .steps { grid-template-columns: 1fr; }
+    .step, .step:last-child, .step:nth-child(2) {
+      padding: 1.75rem 0;
+      border-right: none;
+      border-bottom: 0.5px solid var(--border-g);
+    }
+    .step::before { right: 0 !important; left: 0 !important; }
+    .step:last-child { border-bottom: none; }
+    .how { padding: 3rem 1.5rem; }
+    footer { padding: 1.75rem 1.5rem; }
+    .footer-right { text-align: left; }
+    .form-row { max-width: 100%; }
+  }
+</style>
+</head>
+<body>
+
+<div class="tricolore-bar"><span></span><span></span><span></span></div>
+
+<header>
+  <div class="logo">
+    <div class="logo-top">
+      <span class="logo-la">La</span>
+      <span class="logo-cucina">Cucina</span>
+      <span class="logo-box-word">Box</span>
+    </div>
+    <div class="logo-sub">By Cucina Di Paisano · Toronto</div>
+  </div>
+  <div class="header-pill">Coming Soon</div>
+</header>
+
+<section class="hero">
+
+  <div class="hero-left">
+    <div class="eyebrow a d1">Toronto's Italian Meal Plan</div>
+    <h1 class="a d2">
+      Authentic Italian,<br>
+      <em>delivered fresh<br>to your door.</em>
+    </h1>
+    <p class="hero-sub a d3">
+      Restaurant-quality pasta and entrées from the kitchen of Cucina Di Paisano — prepared fresh, packed with care, and delivered once or twice a week on your schedule.
+    </p>
+    <div class="from-badge a d3">
+      From the kitchen of&nbsp;<strong>Cucina Di Paisano</strong>&nbsp;· 865 York Mills Rd, Toronto
+    </div>
+    <div class="a d4">
+      <label class="form-label" for="email-input">Be the first to know when we launch</label>
+      <div class="form-row">
+        <input type="email" id="email-input" placeholder="your@email.com" autocomplete="email" />
+        <button type="button" onclick="handleSubmit()">Notify Me</button>
+      </div>
+      <p class="form-note">One email when we launch. No spam, ever.</p>
+      <p class="success-msg" id="success-msg">✓ You're on the list — we'll be in touch soon.</p>
+    </div>
+  </div>
+
+  <div class="hero-right">
+    <div class="hero-right-content">
+      <div class="right-tag">Launching in Toronto · 2026</div>
+      <h2>Fresh from our kitchen<br>to your <em>table.</em></h2>
+      <ul class="feature-list">
+        <li>Weekly or bi-weekly delivery — you choose the frequency</li>
+        <li>Rotating menu of housemade pasta and slow-braised entrées</li>
+        <li>Flexible subscription — pause or cancel anytime</li>
+        <li>Gluten-free pasta and pizza dough available</li>
+        <li>Individual and family portion sizes</li>
+        <li>Pre-order model — always fresh, never frozen</li>
+      </ul>
+    </div>
+  </div>
+
+</section>
+
+<div class="strip">
+  <div class="strip-g"></div>
+  <div class="strip-w"></div>
+  <div class="strip-r"></div>
+</div>
+
+<div class="marquee-wrap">
+  <div class="marquee-track">
+    <div class="marquee-item">Housemade pasta</div>
+    <div class="marquee-item">Slow-braised entrées</div>
+    <div class="marquee-item">Weekly delivery</div>
+    <div class="marquee-item">Toronto only</div>
+    <div class="marquee-item">Subscription-based</div>
+    <div class="marquee-item">Pre-order fresh</div>
+    <div class="marquee-item">Gluten-free options</div>
+    <div class="marquee-item">Family &amp; individual plans</div>
+    <div class="marquee-item">Housemade pasta</div>
+    <div class="marquee-item">Slow-braised entrées</div>
+    <div class="marquee-item">Weekly delivery</div>
+    <div class="marquee-item">Toronto only</div>
+    <div class="marquee-item">Subscription-based</div>
+    <div class="marquee-item">Pre-order fresh</div>
+    <div class="marquee-item">Gluten-free options</div>
+    <div class="marquee-item">Family &amp; individual plans</div>
+  </div>
+</div>
+
+<section class="how">
+  <div class="section-eyebrow"><span>How it works</span></div>
+  <div class="steps">
+    <div class="step">
+      <div class="step-num">01</div>
+      <h3>Choose your plan</h3>
+      <p>Pick your meals, your frequency, and your portion size. Individual or family. Once or twice a week. Built around your schedule.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">02</div>
+      <h3>We cook &amp; pack</h3>
+      <p>Our kitchen prepares everything fresh — the same recipes we've served at Cucina Di Paisano for years. Packed by hand with heating instructions included.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">03</div>
+      <h3>Delivered to your door</h3>
+      <p>Right to your home anywhere in Toronto. Heat, plate, and sit down to a proper Italian meal — no effort required on your end.</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div>
+    <div class="footer-logo">La Cucina <em>Box</em></div>
+    <div class="footer-tagline">Mangia bene, vivi bene.</div>
+  </div>
+  <div class="footer-right">
+    © 2026 La Cucina Box by Cucina Di Paisano<br>
+    865 York Mills Rd, Toronto &nbsp;·&nbsp;
+    <a href="tel:4162225487">416-222-5487</a><br>
+    <a href="https://www.paisano.ca" target="_blank" rel="noopener">paisano.ca</a>
+  </div>
+</footer>
+
+<script>
+  function handleSubmit() {
+    var input = document.getElementById('email-input');
+    var success = document.getElementById('success-msg');
+    var email = input.value.trim();
+    if (!email || !email.includes('@')) {
+      input.style.outline = '2px solid #B83232';
+      input.focus();
+      return;
+    }
+    input.style.outline = '';
+    input.value = '';
+    input.placeholder = 'Thank you!';
+    success.style.display = 'block';
+  }
+</script>
+</body>
+</html>
