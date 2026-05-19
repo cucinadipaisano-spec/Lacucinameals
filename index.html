@@ -488,19 +488,23 @@
       <em>delivered fresh<br>to your door.</em>
     </h1>
     <p class="hero-sub a d3">
-      Restaurant-quality pasta and entrees from the kitchen of Cucina Di Paisano — prepared fresh, packed with care, and delivered once or twice a week on your schedule.
+      Restaurant-quality pasta and entrées from the kitchen of Cucina Di Paisano — prepared fresh, packed with care, and delivered once or twice a week on your schedule.
     </p>
     <div class="from-badge a d3">
       From the kitchen of&nbsp;<strong>Cucina Di Paisano</strong>&nbsp;· 865 York Mills Rd, Toronto
     </div>
     <div class="a d4">
       <label class="form-label" for="email-input">Be the first to know when we launch</label>
-      <div class="form-row">
-        <input type="email" id="email-input" placeholder="your@email.com" autocomplete="email" />
-        <button type="button" onclick="handleSubmit()">Notify Me</button>
-      </div>
+      <form id="waitlist-form" action="https://formspree.io/f/xvzyzzqe" method="POST" onsubmit="handleSubmit(event)">
+        <div class="form-row">
+          <input type="email" id="email-input" name="email" placeholder="your@email.com" autocomplete="email" required />
+          <button type="submit">Notify Me</button>
+        </div>
+        <input type="hidden" name="_subject" value="New La Cucina Meals waitlist signup" />
+        <input type="hidden" name="_replyto" value="" />
+      </form>
       <p class="form-note">One email when we launch. No spam, ever.</p>
-      <p class="success-msg" id="success-msg">You're on the list — we'll be in touch soon.</p>
+      <p class="success-msg" id="success-msg">✓ You're on the list — we'll be in touch soon.</p>
     </div>
   </div>
 
@@ -510,7 +514,7 @@
       <h2>Fresh from our kitchen<br>to your <em>table.</em></h2>
       <ul class="feature-list">
         <li>Weekly or bi-weekly delivery — you choose the frequency</li>
-        <li>Rotating menu of housemade pasta and slow-braised entrees</li>
+        <li>Rotating menu of housemade pasta and slow-braised entrées</li>
         <li>Flexible subscription — pause or cancel anytime</li>
         <li>Gluten-free pasta and pizza dough available</li>
         <li>Individual and family portion sizes</li>
@@ -530,21 +534,21 @@
 <div class="marquee-wrap">
   <div class="marquee-track">
     <div class="marquee-item">Housemade pasta</div>
-    <div class="marquee-item">Slow-braised entrees</div>
+    <div class="marquee-item">Slow-braised entrées</div>
     <div class="marquee-item">Weekly delivery</div>
     <div class="marquee-item">Toronto only</div>
     <div class="marquee-item">Subscription-based</div>
     <div class="marquee-item">Pre-order fresh</div>
     <div class="marquee-item">Gluten-free options</div>
-    <div class="marquee-item">Family and individual plans</div>
+    <div class="marquee-item">Family &amp; individual plans</div>
     <div class="marquee-item">Housemade pasta</div>
-    <div class="marquee-item">Slow-braised entrees</div>
+    <div class="marquee-item">Slow-braised entrées</div>
     <div class="marquee-item">Weekly delivery</div>
     <div class="marquee-item">Toronto only</div>
     <div class="marquee-item">Subscription-based</div>
     <div class="marquee-item">Pre-order fresh</div>
     <div class="marquee-item">Gluten-free options</div>
-    <div class="marquee-item">Family and individual plans</div>
+    <div class="marquee-item">Family &amp; individual plans</div>
   </div>
 </div>
 
@@ -558,7 +562,7 @@
     </div>
     <div class="step">
       <div class="step-num">02</div>
-      <h3>We cook and pack</h3>
+      <h3>We cook &amp; pack</h3>
       <p>Our kitchen prepares everything fresh — the same recipes we've served at Cucina Di Paisano for years. Packed by hand with heating instructions included.</p>
     </div>
     <div class="step">
@@ -575,7 +579,7 @@
     <div class="footer-tagline">Mangia bene, vivi bene.</div>
   </div>
   <div class="footer-right">
-    2026 La Cucina Meals by Cucina Di Paisano<br>
+    © 2026 La Cucina Meals by Cucina Di Paisano<br>
     865 York Mills Rd, Toronto &nbsp;·&nbsp;
     <a href="tel:4162225487">416-222-5487</a><br>
     <a href="https://www.paisano.ca" target="_blank" rel="noopener">paisano.ca</a>
@@ -583,19 +587,42 @@
 </footer>
 
 <script>
-  function handleSubmit() {
+  async function handleSubmit(e) {
+    e.preventDefault();
+    var form = document.getElementById('waitlist-form');
     var input = document.getElementById('email-input');
     var success = document.getElementById('success-msg');
-    var email = input.value.trim();
-    if (!email || !email.includes('@')) {
+    var button = form.querySelector('button');
+
+    if (!input.value.trim() || !input.value.includes('@')) {
       input.style.outline = '2px solid #B83232';
       input.focus();
       return;
     }
+
     input.style.outline = '';
-    input.value = '';
-    input.placeholder = 'Thank you!';
-    success.style.display = 'block';
+    button.textContent = 'Sending…';
+    button.disabled = true;
+
+    try {
+      var response = await fetch(form.action, {
+        method: 'POST',
+        body: new FormData(form),
+        headers: { 'Accept': 'application/json' }
+      });
+
+      if (response.ok) {
+        form.style.display = 'none';
+        success.style.display = 'block';
+      } else {
+        button.textContent = 'Try Again';
+        button.disabled = false;
+        input.style.outline = '2px solid #B83232';
+      }
+    } catch (err) {
+      button.textContent = 'Try Again';
+      button.disabled = false;
+    }
   }
 </script>
 </body>
