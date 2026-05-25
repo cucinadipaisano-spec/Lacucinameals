@@ -34,8 +34,8 @@ src="https://www.facebook.com/tr?id=1424904829665832&ev=PageView&noscript=1"
   --green-mid: #2D5C45;
   --green-light: #4A7C5F;
   --green-pale: #EAF2EC;
-  --red-rich: #B83232;
-  --red-warm: #CC4040;
+  --red-rich: #C93535;
+  --red-warm: #D94848;
   --gold: #C9A050;
   --gold-light: #E8D5A0;
   --ink: #1A1A1A;
@@ -309,7 +309,7 @@ footer { background: var(--green-deep); padding: 1.75rem 2rem; display: flex; al
   .hero-full { min-height: calc(100vh - 4px); align-items: flex-start; padding-top: 1.5rem; }
   .hero-content { padding: 1rem 1.25rem; }
   .logo-cucina, .logo-meals-word { font-size: 1.6rem; }
-  h1 { font-size: 1.9rem; }
+  h1 { font-size: 2.2rem; }
   .hero-sub { display: none; }
   .signup-box { padding: 1.25rem; }
   .features-strip { gap: 1.25rem; padding: 1.25rem; }
@@ -446,7 +446,7 @@ footer { background: var(--green-deep); padding: 1.75rem 2rem; display: flex; al
     var button = form.querySelector('button');
 
     if (!input.value.trim() || !input.value.includes('@')) {
-      input.style.outline = '2px solid #CC4040';
+      input.style.outline = '2px solid #D94848';
       input.focus();
       return;
     }
@@ -472,7 +472,7 @@ footer { background: var(--green-deep); padding: 1.75rem 2rem; display: flex; al
       } else {
         button.textContent = 'Try Again';
         button.disabled = false;
-        input.style.outline = '2px solid #CC4040';
+        input.style.outline = '2px solid #D94848';
       }
     } catch (err) {
       button.textContent = 'Try Again';
