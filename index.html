@@ -22,6 +22,9 @@ fbq('track', 'PageView');
 src="https://www.facebook.com/tr?id=1424904829665832&ev=PageView&noscript=1"
 /></noscript>
 <!-- End Meta Pixel Code -->
+<!-- EmailJS SDK -->
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<script>emailjs.init('g_YorS5AGwpnYbE6Y');</script>
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 :root {
@@ -419,7 +422,7 @@ footer { background: var(--green-deep); padding: 2rem 3rem; display: flex; align
   </div>
 
   <div class="hero-right">
-    <img src="https://raw.githubusercontent.com/cucinadipaisano-spec/Lacucinameals/main/pasta-hero.jpg" alt="Housemade spaghetti bolognese from Cucina Di Paisano" onerror="this.style.display='none'" />
+    <img src="https://cucinadipaisano-spec.github.io/Lacucinameals/pasta-hero.jpg" alt="Housemade spaghetti bolognese from Cucina Di Paisano" onerror="this.style.display='none'" />
     <div class="hero-right-overlay"></div>
     <div class="hero-right-content">
       <div class="right-tag">Launching in Toronto · 2026</div>
@@ -500,21 +503,31 @@ footer { background: var(--green-deep); padding: 2rem 3rem; display: flex; align
     var input = document.getElementById('email-input');
     var success = document.getElementById('success-msg');
     var button = form.querySelector('button');
+
     if (!input.value.trim() || !input.value.includes('@')) {
       input.style.outline = '2px solid #CC4040';
       input.focus();
       return;
     }
+
     input.style.outline = '';
     button.textContent = 'Sending…';
     button.disabled = true;
+
     try {
+      // Submit to Formspree (saves the email)
       var response = await fetch(form.action, {
         method: 'POST',
         body: new FormData(form),
         headers: { 'Accept': 'application/json' }
       });
+
       if (response.ok) {
+        // Send thank you email via EmailJS
+        emailjs.send('service_twcxy5k', 'template_jcs6b4r', {
+          email: input.value.trim()
+        });
+
         form.style.display = 'none';
         success.style.display = 'block';
         fbq('track', 'Lead');
