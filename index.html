@@ -44,10 +44,9 @@ src="https://www.facebook.com/tr?id=1424904829665832&ev=PageView&noscript=1"
   --font-display: 'Cormorant Garamond', Georgia, serif;
   --font-body: 'Jost', sans-serif;
 }
-html, body { height: 100%; }
 html { scroll-behavior: smooth; }
 body {
-  background: var(--white);
+  background: var(--green-deep);
   color: var(--ink);
   font-family: var(--font-body);
   font-weight: 300;
@@ -59,120 +58,119 @@ body {
 .tricolore-bar { display: flex; height: 4px; width: 100%; }
 .tricolore-bar span { flex: 1; }
 .tricolore-bar span:nth-child(1) { background: var(--green-deep); }
-.tricolore-bar span:nth-child(2) { background: var(--white); border-top: 0.5px solid var(--border-g); }
+.tricolore-bar span:nth-child(2) { background: var(--white); }
 .tricolore-bar span:nth-child(3) { background: var(--red-rich); }
 
-/* ── FULL SCREEN HERO with background image ── */
-.hero-full {
-  position: relative;
+/* ── MAIN SPLIT LAYOUT ── */
+.split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
   min-height: calc(100vh - 4px);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
 }
 
-/* Background image */
-.hero-bg {
-  position: absolute;
-  inset: 0;
-  background-image: url('https://raw.githubusercontent.com/cucinadipaisano-spec/Lacucinameals/main/pasta-hero.jpg');
-  background-size: cover;
-  background-position: center;
-  filter: brightness(0.55);
-  z-index: 0;
-}
-
-/* Green overlay on top of image */
-.hero-overlay {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(135deg, rgba(27,58,45,0.78) 0%, rgba(27,58,45,0.55) 50%, rgba(27,58,45,0.4) 100%);
-  z-index: 1;
-}
-
-/* Content sits above overlays */
-.hero-content {
-  position: relative;
-  z-index: 2;
-  width: 100%;
-  max-width: 560px;
-  padding: 2rem 1.5rem;
-  margin: 0 auto;
+/* ── LEFT — dark green signup panel ── */
+.panel-left {
+  background: var(--green-deep);
+  padding: 3rem 3rem 3rem 3.5rem;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  text-align: center;
+  justify-content: center;
+  position: relative;
+}
+
+/* Gold left accent bar */
+.panel-left::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 4px;
+  background: linear-gradient(to bottom, var(--gold), transparent);
 }
 
 /* Logo */
 .logo {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1.75rem;
 }
 .logo-top { display: flex; align-items: baseline; gap: 0.4rem; }
-.logo-la { font-family: var(--font-display); font-style: italic; font-weight: 300; font-size: 1.2rem; color: var(--red-warm); }
-.logo-cucina { font-family: var(--font-display); font-weight: 600; font-size: 2rem; letter-spacing: 0.06em; color: var(--white); text-transform: uppercase; }
-.logo-meals-word { font-family: var(--font-display); font-weight: 600; font-size: 2rem; letter-spacing: 0.06em; color: var(--red-warm); text-transform: uppercase; }
-.logo-sub { font-size: 0.58rem; font-weight: 500; letter-spacing: 0.28em; text-transform: uppercase; color: var(--gold); margin-top: 5px; }
+.logo-la { font-family: var(--font-display); font-style: italic; font-weight: 300; font-size: 1.1rem; color: var(--red-warm); }
+.logo-cucina { font-family: var(--font-display); font-weight: 600; font-size: 1.9rem; letter-spacing: 0.06em; color: var(--white); text-transform: uppercase; }
+.logo-meals-word { font-family: var(--font-display); font-weight: 600; font-size: 1.9rem; letter-spacing: 0.06em; color: var(--red-warm); text-transform: uppercase; }
+.logo-sub { font-size: 0.58rem; font-weight: 500; letter-spacing: 0.28em; text-transform: uppercase; color: var(--gold); margin-top: 5px; opacity: 0.8; }
 
 /* Gold divider */
-.gold-line { width: 60px; height: 1.5px; background: var(--gold); margin: 0 auto 1.25rem; opacity: 0.6; }
+.gold-line { width: 50px; height: 1.5px; background: var(--gold); margin-bottom: 1.25rem; opacity: 0.5; }
 
 /* Eyebrow */
 .eyebrow {
-  font-size: 0.62rem;
+  font-size: 0.6rem;
   font-weight: 500;
   letter-spacing: 0.3em;
   text-transform: uppercase;
   color: var(--gold);
-  margin-bottom: 0.75rem;
+  margin-bottom: 0.6rem;
+  opacity: 0.85;
 }
 
 /* Headline */
 h1 {
   font-family: var(--font-display);
   font-weight: 300;
-  font-size: clamp(2rem, 5vw, 3rem);
+  font-size: clamp(1.9rem, 2.8vw, 3rem);
   line-height: 1.15;
   color: var(--white);
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.6rem;
 }
 h1 em { font-style: italic; color: var(--gold-light); font-weight: 400; }
 
 .hero-sub {
-  font-size: 0.88rem;
+  font-size: 0.85rem;
   font-weight: 300;
   line-height: 1.8;
-  color: rgba(255,254,249,0.65);
+  color: rgba(255,254,249,0.55);
   margin-bottom: 1.5rem;
-  max-width: 38ch;
+  max-width: 36ch;
 }
+
+/* From badge */
+.from-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: rgba(255,254,249,0.06);
+  border: 0.5px solid rgba(201,160,80,0.25);
+  border-radius: 2px;
+  padding: 0.4rem 0.85rem;
+  margin-bottom: 1.5rem;
+  font-size: 0.68rem;
+  color: rgba(255,254,249,0.5);
+  width: fit-content;
+}
+.from-badge strong { color: rgba(255,254,249,0.8); font-weight: 500; }
+.from-badge::before { content: ''; display: block; width: 5px; height: 5px; border-radius: 50%; background: var(--gold); flex-shrink: 0; opacity: 0.7; }
 
 /* ── SIGNUP BOX ── */
 .signup-box {
-  background: rgba(20, 50, 35, 0.82);
-  border: 1px solid rgba(201,160,80,0.35);
+  background: rgba(255,254,249,0.05);
+  border: 1px solid rgba(201,160,80,0.25);
   border-radius: 6px;
   padding: 1.5rem;
-  width: 100%;
-  max-width: 480px;
-  backdrop-filter: blur(12px);
+  max-width: 420px;
 }
 .signup-box-label {
-  font-size: 0.6rem;
+  font-size: 0.58rem;
   font-weight: 500;
   letter-spacing: 0.25em;
   text-transform: uppercase;
   color: var(--gold);
-  margin-bottom: 0.4rem;
+  margin-bottom: 0.35rem;
   display: block;
+  opacity: 0.9;
 }
 .signup-box-title {
   font-family: var(--font-display);
-  font-size: 1.35rem;
+  font-size: 1.3rem;
   font-weight: 400;
   color: var(--white);
   margin-bottom: 0.3rem;
@@ -180,17 +178,17 @@ h1 em { font-style: italic; color: var(--gold-light); font-weight: 400; }
 }
 .signup-box-title em { font-style: italic; color: var(--gold-light); }
 .signup-box-sub {
-  font-size: 0.75rem;
-  color: rgba(255,254,249,0.5);
+  font-size: 0.73rem;
+  color: rgba(255,254,249,0.45);
   margin-bottom: 1rem;
   line-height: 1.6;
 }
 .form-row {
   display: flex;
-  border: 1.5px solid rgba(255,254,249,0.2);
+  border: 1.5px solid rgba(255,254,249,0.18);
   border-radius: 3px;
   overflow: hidden;
-  background: rgba(255,255,255,0.06);
+  background: rgba(255,255,255,0.05);
 }
 .form-row input[type="email"] {
   flex: 1;
@@ -204,14 +202,14 @@ h1 em { font-style: italic; color: var(--gold-light); font-weight: 400; }
   outline: none;
   min-width: 0;
 }
-.form-row input::placeholder { color: rgba(255,254,249,0.3); }
+.form-row input::placeholder { color: rgba(255,254,249,0.25); }
 .form-row button {
   background: var(--red-rich);
   color: var(--white);
   border: none;
-  padding: 0.85rem 1.25rem;
+  padding: 0.85rem 1.2rem;
   font-family: var(--font-body);
-  font-size: 0.7rem;
+  font-size: 0.68rem;
   font-weight: 600;
   letter-spacing: 0.15em;
   text-transform: uppercase;
@@ -221,54 +219,101 @@ h1 em { font-style: italic; color: var(--gold-light); font-weight: 400; }
   flex-shrink: 0;
 }
 .form-row button:hover { background: var(--red-warm); }
-.form-note { margin-top: 0.5rem; font-size: 0.65rem; color: rgba(255,254,249,0.3); text-align: left; }
+.form-note { margin-top: 0.5rem; font-size: 0.63rem; color: rgba(255,254,249,0.25); }
 .success-msg {
   display: none;
   margin-top: 0.75rem;
-  font-size: 0.82rem;
+  font-size: 0.8rem;
   color: var(--gold-light);
   font-weight: 500;
 }
 .trust-row {
   display: flex;
   align-items: center;
-  justify-content: center;
   gap: 1.25rem;
   margin-top: 0.85rem;
   padding-top: 0.85rem;
-  border-top: 0.5px solid rgba(255,254,249,0.1);
+  border-top: 0.5px solid rgba(255,254,249,0.08);
   flex-wrap: wrap;
 }
 .trust-item {
-  font-size: 0.65rem;
-  color: rgba(255,254,249,0.4);
+  font-size: 0.63rem;
+  color: rgba(255,254,249,0.35);
   display: flex;
   align-items: center;
   gap: 0.35rem;
 }
-.trust-item::before { content: '✓'; color: var(--gold); font-size: 0.65rem; }
+.trust-item::before { content: '✓'; color: var(--gold); font-size: 0.63rem; opacity: 0.8; }
 
-/* ── FEATURES STRIP ── */
-.features-strip {
-  background: var(--green-deep);
-  padding: 1.5rem 2rem;
-  display: flex;
-  justify-content: center;
-  gap: 2.5rem;
-  flex-wrap: wrap;
-  border-top: 0.5px solid rgba(201,160,80,0.2);
+/* ── RIGHT — food photo panel ── */
+.panel-right {
+  position: relative;
+  overflow: hidden;
+  min-height: 100%;
 }
-.feature-item {
-  display: flex;
-  align-items: center;
-  gap: 0.6rem;
-  font-size: 0.75rem;
-  color: rgba(255,254,249,0.6);
+.panel-right img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+}
+
+/* Subtle left edge fade so it blends into left panel */
+.panel-right::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 80px;
+  background: linear-gradient(to right, var(--green-deep), transparent);
+  z-index: 1;
+}
+
+/* Bottom overlay with feature list */
+.panel-right-overlay {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  padding: 2rem;
+  background: linear-gradient(to top, rgba(27,58,45,0.92) 0%, rgba(27,58,45,0.4) 60%, transparent 100%);
+  z-index: 2;
+}
+.right-tag {
+  display: inline-block;
+  font-size: 0.58rem;
+  font-weight: 500;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--gold);
+  border: 0.5px solid rgba(201,160,80,0.35);
+  padding: 0.35rem 0.75rem;
+  margin-bottom: 0.85rem;
+}
+.panel-right h2 {
+  font-family: var(--font-display);
   font-weight: 300;
+  font-size: 1.75rem;
+  color: var(--white);
+  line-height: 1.3;
+  margin-bottom: 1rem;
 }
-.feature-item::before { content: '—'; color: var(--red-warm); font-size: 0.6rem; }
+.panel-right h2 em { font-style: italic; color: var(--gold-light); }
+.feature-list { list-style: none; display: flex; flex-direction: column; gap: 0.5rem; }
+.feature-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.7rem;
+  font-size: 0.78rem;
+  font-weight: 300;
+  color: rgba(255,254,249,0.7);
+  line-height: 1.5;
+}
+.feature-list li::before { content: ''; display: block; width: 12px; height: 1.5px; background: var(--red-warm); margin-top: 0.55em; flex-shrink: 0; }
 
 /* ── MARQUEE ── */
+.strip { display: grid; grid-template-columns: 1fr 1fr 1fr; height: 4px; }
+.strip-g { background: var(--green-deep); }
+.strip-w { background: var(--off-white); }
+.strip-r { background: var(--red-rich); }
 .marquee-wrap { background: var(--off-white); border-top: 0.5px solid var(--border-g); border-bottom: 0.5px solid var(--border-g); padding: 0.75rem 0; overflow: hidden; }
 .marquee-track { display: flex; gap: 3rem; animation: marquee 24s linear infinite; width: max-content; }
 .marquee-item { font-family: var(--font-display); font-style: italic; font-size: 0.95rem; color: var(--green-mid); white-space: nowrap; display: flex; align-items: center; gap: 1.5rem; }
@@ -276,7 +321,7 @@ h1 em { font-style: italic; color: var(--gold-light); font-weight: 400; }
 @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 
 /* ── HOW IT WORKS ── */
-.how { padding: 4rem 2rem; }
+.how { background: var(--white); padding: 4rem 3rem; }
 .section-eyebrow { display: flex; align-items: center; gap: 1rem; margin-bottom: 2.5rem; }
 .section-eyebrow span { font-size: 0.65rem; font-weight: 500; letter-spacing: 0.3em; text-transform: uppercase; color: var(--green-deep); white-space: nowrap; }
 .section-eyebrow::before, .section-eyebrow::after { content: ''; flex: 1; height: 0.5px; background: var(--border-g); }
@@ -285,19 +330,19 @@ h1 em { font-style: italic; color: var(--gold-light); font-weight: 400; }
 .step { padding: 2rem 2.5rem 2rem 0; border-right: 0.5px solid var(--border-g); position: relative; }
 .step:last-child { border-right: none; padding-left: 2.5rem; padding-right: 0; }
 .step:nth-child(2) { padding-left: 2.5rem; }
-.step::before { content: ''; position: absolute; top: 0; left: 0; right: 2.5rem; height: 2px; }
-.step:nth-child(1)::before { background: var(--green-deep); right: 2.5rem; }
+.step::before { content: ''; position: absolute; top: 0; height: 2px; }
+.step:nth-child(1)::before { background: var(--green-deep); left: 0; right: 2.5rem; }
 .step:nth-child(2)::before { background: var(--red-rich); left: 2.5rem; right: 2.5rem; }
 .step:nth-child(3)::before { background: var(--gold); left: 2.5rem; right: 0; }
 .step-num { font-family: var(--font-display); font-size: 3rem; font-weight: 300; line-height: 1; margin-bottom: 0.75rem; margin-top: 1rem; }
 .step:nth-child(1) .step-num { color: rgba(27,58,45,0.15); }
-.step:nth-child(2) .step-num { color: rgba(184,50,50,0.15); }
+.step:nth-child(2) .step-num { color: rgba(201,49,49,0.15); }
 .step:nth-child(3) .step-num { color: rgba(201,160,80,0.25); }
 .step h3 { font-family: var(--font-display); font-size: 1.35rem; font-weight: 600; color: var(--green-deep); margin-bottom: 0.5rem; }
 .step p { font-size: 0.82rem; font-weight: 300; line-height: 1.8; color: var(--muted); }
 
 /* ── FOOTER ── */
-footer { background: var(--green-deep); padding: 1.75rem 2rem; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; }
+footer { background: var(--green-deep); padding: 1.75rem 3rem; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; border-top: 0.5px solid rgba(201,160,80,0.15); }
 .footer-logo { font-family: var(--font-display); font-size: 1.1rem; font-weight: 600; color: var(--white); letter-spacing: 0.06em; }
 .footer-logo em { color: var(--red-warm); font-style: italic; font-weight: 300; }
 .footer-tagline { font-family: var(--font-display); font-style: italic; font-size: 0.82rem; color: rgba(255,254,249,0.35); margin-top: 0.2rem; }
@@ -306,23 +351,35 @@ footer { background: var(--green-deep); padding: 1.75rem 2rem; display: flex; al
 
 /* ── MOBILE ── */
 @media (max-width: 768px) {
-  .hero-full { min-height: calc(100vh - 4px); align-items: flex-start; padding-top: 1.5rem; }
-  .hero-content { padding: 1rem 1.25rem; }
+  .split {
+    grid-template-columns: 1fr;
+    min-height: auto;
+  }
+  /* Signup panel first */
+  .panel-left {
+    order: 1;
+    padding: 2.5rem 1.5rem 2rem 2rem;
+  }
+  /* Photo second */
+  .panel-right {
+    order: 2;
+    min-height: 55vw;
+    max-height: 280px;
+  }
+  .panel-right::before { display: none; }
   .logo-cucina, .logo-meals-word { font-size: 1.6rem; }
-  h1 { font-size: 2.2rem; }
-  .hero-sub { display: none; }
-  .signup-box { padding: 1.25rem; }
-  .features-strip { gap: 1.25rem; padding: 1.25rem; }
+  h1 { font-size: 2.1rem; }
+  .signup-box { max-width: 100%; }
+  .panel-right h2 { font-size: 1.4rem; }
   .steps { grid-template-columns: 1fr; }
   .step, .step:last-child, .step:nth-child(2) { padding: 1.5rem 0; border-right: none; border-bottom: 0.5px solid var(--border-g); }
   .step::before { right: 0 !important; left: 0 !important; }
   .step:last-child { border-bottom: none; }
-  .how { padding: 2.5rem 1.25rem; }
-  footer { padding: 1.5rem 1.25rem; }
+  .how { padding: 2.5rem 1.5rem; }
+  footer { padding: 1.5rem 1.5rem; flex-direction: column; }
   .footer-right { text-align: left; }
   .trust-row { gap: 0.75rem; }
-  .logo { margin-bottom: 1rem; }
-  .gold-line { margin-bottom: 0.75rem; }
+  .logo { margin-bottom: 1.25rem; }
 }
 </style>
 </head>
@@ -330,11 +387,10 @@ footer { background: var(--green-deep); padding: 1.75rem 2rem; display: flex; al
 
 <div class="tricolore-bar"><span></span><span></span><span></span></div>
 
-<section class="hero-full">
-  <div class="hero-bg"></div>
-  <div class="hero-overlay"></div>
+<div class="split">
 
-  <div class="hero-content">
+  <!-- LEFT: Signup panel -->
+  <div class="panel-left">
     <div class="logo">
       <div class="logo-top">
         <span class="logo-la">La</span>
@@ -345,12 +401,15 @@ footer { background: var(--green-deep); padding: 1.75rem 2rem; display: flex; al
     </div>
 
     <div class="gold-line"></div>
-
     <div class="eyebrow">Launching in Toronto · 2026</div>
 
     <h1>Authentic Italian,<br><em>delivered fresh</em><br>to your door.</h1>
 
-    <p class="hero-sub">From the kitchen of Cucina Di Paisano — fresh pasta and entrées delivered weekly to your home in North York and Toronto.</p>
+    <p class="hero-sub">From the kitchen of Cucina Di Paisano — fresh pasta and entrées, prepared weekly and delivered to your home in North York and Toronto.</p>
+
+    <div class="from-badge">
+      From the kitchen of&nbsp;<strong>Cucina Di Paisano</strong>&nbsp;· 865 York Mills Rd
+    </div>
 
     <div class="signup-box">
       <span class="signup-box-label">Early Access — $10 Off Your First Order</span>
@@ -372,34 +431,46 @@ footer { background: var(--green-deep); padding: 1.75rem 2rem; display: flex; al
       </div>
     </div>
   </div>
-</section>
 
-<div class="features-strip">
-  <div class="feature-item">Housemade pasta &amp; entrées</div>
-  <div class="feature-item">Weekly or bi-weekly delivery</div>
-  <div class="feature-item">Gluten-free options available</div>
-  <div class="feature-item">Individual &amp; family sizes</div>
-  <div class="feature-item">Always fresh, never frozen</div>
+  <!-- RIGHT: Food photo -->
+  <div class="panel-right">
+    <img src="https://raw.githubusercontent.com/cucinadipaisano-spec/Lacucinameals/main/pasta-hero.jpg"
+         alt="Fresh Italian meals from La Cucina Meals — pasta, lasagna and entrées in delivery containers" />
+    <div class="panel-right-overlay">
+      <div class="right-tag">Launching 2026 · North York & Toronto</div>
+      <h2>Fresh from our kitchen<br>to your <em>table.</em></h2>
+      <ul class="feature-list">
+        <li>Weekly or bi-weekly delivery — your schedule</li>
+        <li>Rotating housemade pasta and slow-braised entrées</li>
+        <li>Gluten-free pasta and pizza dough available</li>
+        <li>Individual and family portion sizes</li>
+        <li>Always fresh — never frozen</li>
+      </ul>
+    </div>
+  </div>
+
 </div>
+
+<div class="strip"><div class="strip-g"></div><div class="strip-w"></div><div class="strip-r"></div></div>
 
 <div class="marquee-wrap">
   <div class="marquee-track">
     <div class="marquee-item">Housemade pasta</div>
     <div class="marquee-item">Slow-braised entrées</div>
     <div class="marquee-item">Weekly delivery</div>
-    <div class="marquee-item">North York &amp; Toronto</div>
+    <div class="marquee-item">North York & Toronto</div>
     <div class="marquee-item">Subscription-based</div>
     <div class="marquee-item">Pre-order fresh</div>
     <div class="marquee-item">Gluten-free options</div>
-    <div class="marquee-item">Family &amp; individual plans</div>
+    <div class="marquee-item">Family & individual plans</div>
     <div class="marquee-item">Housemade pasta</div>
     <div class="marquee-item">Slow-braised entrées</div>
     <div class="marquee-item">Weekly delivery</div>
-    <div class="marquee-item">North York &amp; Toronto</div>
+    <div class="marquee-item">North York & Toronto</div>
     <div class="marquee-item">Subscription-based</div>
     <div class="marquee-item">Pre-order fresh</div>
     <div class="marquee-item">Gluten-free options</div>
-    <div class="marquee-item">Family &amp; individual plans</div>
+    <div class="marquee-item">Family & individual plans</div>
   </div>
 </div>
 
@@ -413,13 +484,13 @@ footer { background: var(--green-deep); padding: 1.75rem 2rem; display: flex; al
     </div>
     <div class="step">
       <div class="step-num">02</div>
-      <h3>We cook &amp; pack</h3>
+      <h3>We cook & pack</h3>
       <p>Our kitchen prepares everything fresh — the same recipes we've served at Cucina Di Paisano for years. Packed by hand with heating instructions included.</p>
     </div>
     <div class="step">
       <div class="step-num">03</div>
       <h3>Delivered to your door</h3>
-      <p>Right to your home anywhere in Toronto. Heat, plate, and sit down to a proper Italian meal — no effort required on your end.</p>
+      <p>Right to your home in North York and Toronto. Heat, plate, and sit down to a proper Italian meal — no effort required.</p>
     </div>
   </div>
 </section>
@@ -444,24 +515,20 @@ footer { background: var(--green-deep); padding: 1.75rem 2rem; display: flex; al
     var input = document.getElementById('email-input');
     var success = document.getElementById('success-msg');
     var button = form.querySelector('button');
-
     if (!input.value.trim() || !input.value.includes('@')) {
       input.style.outline = '2px solid #D94848';
       input.focus();
       return;
     }
-
     input.style.outline = '';
     button.textContent = 'Sending…';
     button.disabled = true;
-
     try {
       var response = await fetch(form.action, {
         method: 'POST',
         body: new FormData(form),
         headers: { 'Accept': 'application/json' }
       });
-
       if (response.ok) {
         emailjs.send('service_twcxy5k', 'template_jcs6b4r', {
           email: input.value.trim()
