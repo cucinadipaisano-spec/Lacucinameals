@@ -22,9 +22,6 @@ fbq('track', 'PageView');
 src="https://www.facebook.com/tr?id=1424904829665832&ev=PageView&noscript=1"
 /></noscript>
 <!-- End Meta Pixel Code -->
-<!-- EmailJS SDK -->
-<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
-<script>emailjs.init('g_YorS5AGwpnYbE6Y');</script>
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 :root {
@@ -82,12 +79,12 @@ header {
 .hero {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  min-height: calc(100vh - 100px);
+  min-height: calc(100vh - 70px);
 }
 
 /* LEFT — signup focus */
 .hero-left {
-  padding: 3.5rem 3.5rem 3.5rem 3rem;
+  padding: 1.5rem 3.5rem 1.5rem 3rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -109,7 +106,7 @@ header {
   letter-spacing: 0.3em;
   text-transform: uppercase;
   color: var(--red-rich);
-  margin-bottom: 1rem;
+  margin-bottom: 0.5rem;
   display: flex;
   align-items: center;
   gap: 0.75rem;
@@ -119,10 +116,10 @@ header {
 h1 {
   font-family: var(--font-display);
   font-weight: 300;
-  font-size: clamp(2.4rem, 3.8vw, 3.8rem);
+  font-size: clamp(2.2rem, 3.5vw, 3.4rem);
   line-height: 1.1;
   color: var(--green-deep);
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.25rem;
 }
 h1 em { font-style: italic; color: var(--red-rich); font-weight: 400; }
 
@@ -132,7 +129,7 @@ h1 em { font-style: italic; color: var(--red-rich); font-weight: 400; }
   line-height: 1.85;
   color: var(--muted);
   max-width: 40ch;
-  margin: 1rem 0 1.5rem;
+  margin: 0.5rem 0 0.75rem;
 }
 
 .from-badge {
@@ -143,7 +140,7 @@ h1 em { font-style: italic; color: var(--red-rich); font-weight: 400; }
   border: 0.5px solid var(--border-g);
   border-radius: 2px;
   padding: 0.5rem 1rem;
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
   font-size: 0.72rem;
   font-weight: 400;
   letter-spacing: 0.06em;
@@ -157,7 +154,7 @@ h1 em { font-style: italic; color: var(--red-rich); font-weight: 400; }
 .signup-box {
   background: var(--green-deep);
   border-radius: 4px;
-  padding: 2rem;
+  padding: 1.5rem;
   max-width: 460px;
 }
 .signup-box-label {
@@ -181,7 +178,7 @@ h1 em { font-style: italic; color: var(--red-rich); font-weight: 400; }
 .signup-box-sub {
   font-size: 0.78rem;
   color: rgba(255,254,249,0.55);
-  margin-bottom: 1.25rem;
+  margin-bottom: 0.85rem;
   line-height: 1.6;
 }
 .form-row {
@@ -230,8 +227,8 @@ h1 em { font-style: italic; color: var(--red-rich); font-weight: 400; }
   display: flex;
   align-items: center;
   gap: 1.5rem;
-  margin-top: 1.5rem;
-  padding-top: 1.25rem;
+  margin-top: 0.85rem;
+  padding-top: 0.85rem;
   border-top: 0.5px solid rgba(255,254,249,0.1);
 }
 .trust-item {
@@ -503,31 +500,21 @@ footer { background: var(--green-deep); padding: 2rem 3rem; display: flex; align
     var input = document.getElementById('email-input');
     var success = document.getElementById('success-msg');
     var button = form.querySelector('button');
-
     if (!input.value.trim() || !input.value.includes('@')) {
       input.style.outline = '2px solid #CC4040';
       input.focus();
       return;
     }
-
     input.style.outline = '';
     button.textContent = 'Sending…';
     button.disabled = true;
-
     try {
-      // Submit to Formspree (saves the email)
       var response = await fetch(form.action, {
         method: 'POST',
         body: new FormData(form),
         headers: { 'Accept': 'application/json' }
       });
-
       if (response.ok) {
-        // Send thank you email via EmailJS
-        emailjs.send('service_twcxy5k', 'template_jcs6b4r', {
-          email: input.value.trim()
-        });
-
         form.style.display = 'none';
         success.style.display = 'block';
         fbq('track', 'Lead');
